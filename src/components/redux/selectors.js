@@ -1,11 +1,18 @@
-/* export function getContacts(state) {
-  return state.contacts;
-}
-export function (state) {
-  return state.filter;
-} */
+import { createSelector } from '@reduxjs/toolkit';
 
-export const getTasks = state => state.tasks.items;
-export const getIsLoading = state => state.tasks.isLoading;
-export const getError = state => state.tasks.error;
+export const getTasks = state => state.contacts.items;
+export const getIsLoading = state => state.contacts.isLoading;
+export const getError = state => state.contacts.error;
 export const getStatusFilter = state => state.filters.status;
+
+
+export const visibleContacts = createSelector(
+  [getStatusFilter, getTasks],
+  (filter, contacts) => {
+    const normalizedFilter = filter.trim().toLowerCase();
+
+    return contacts.filter(contact =>
+      contact.name.trim().toLowerCase().includes(normalizedFilter)
+    );
+  }
+);

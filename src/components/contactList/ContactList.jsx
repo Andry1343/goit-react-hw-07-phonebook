@@ -1,9 +1,12 @@
 import { ContactItem } from './ContactItem';
 import { useSelector } from 'react-redux';
-import { /* getContacts, */ getStatusFilter } from 'components/redux/selectors';
+/* import { getStatusFilter } from 'components/redux/selectors'; */
+import { visibleContacts } from 'components/redux/selectors';
 
 export const ContactList = () => {
-  const contacts = useSelector(getStatusFilter);
+  const contacts = useSelector(visibleContacts);
+
+ /*  const contacts = useSelector(getStatusFilter);
   const filter = useSelector(getStatusFilter);
 
   const getFilteredContacts = () => {
@@ -14,11 +17,11 @@ export const ContactList = () => {
     );
   };
 
-  const visibleContacts = getFilteredContacts();
+  const visibleContacts = getFilteredContacts(); */
 
   return (
     <ul>
-      {visibleContacts.map(contact => {
+      {contacts.map(contact => {
         return (
           <li key={contact.id}>
             <ContactItem contact={contact} />
