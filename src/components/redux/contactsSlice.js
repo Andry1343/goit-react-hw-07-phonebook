@@ -4,6 +4,8 @@ import { filterReducer } from './filterSlice';
 import { createSlice, combineReducers } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
 
+import {fetchContacts} from '../redux/operations'
+
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: [
