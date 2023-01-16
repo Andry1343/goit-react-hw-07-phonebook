@@ -1,10 +1,10 @@
 import { ContactItem } from './ContactItem';
 import { useSelector } from 'react-redux';
-import { getContacts, getFilter } from 'components/redux/selectors';
+import { /* getContacts, */ getStatusFilter } from 'components/redux/selectors';
 
 export const ContactList = () => {
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
+  const contacts = useSelector(getStatusFilter);
+  const filter = useSelector(getStatusFilter);
 
   const getFilteredContacts = () => {
     const normalizedFilter = filter.trim().toLowerCase();
