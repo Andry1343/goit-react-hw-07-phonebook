@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'components/redux/contactsSlice';
+import { addContact } from '../redux/operations';
 import { getStatusFilter } from 'components/redux/selectors';
-import { nanoid } from 'nanoid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import style from '../form/Form.module.css';
@@ -12,7 +11,6 @@ export function ContactForm() {
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
   const contacts = useSelector(getStatusFilter);
-  const contactsId = nanoid();
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -40,6 +38,8 @@ export function ContactForm() {
       return contact.name === name;
     });
     if (isExist) {
+      setName('');
+      setNumber('');
       return toast.warn(`${name} is already in contacts.`);
     }
 
@@ -50,11 +50,10 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor={contactsId}>
+      <label>
         <p>Name</p>{' '}
         <input
           value={name}
-          id={contactsId}
           onChange={handleChange}
           type="text"
           name="name"
@@ -63,11 +62,10 @@ export function ContactForm() {
           required
         />
       </label>
-      <label htmlFor={contactsId}>
+      <label>
         <p>Number</p>{' '}
         <input
           value={number}
-          id={contactsId}
           onChange={handleChange}
           type="tel"
           name="number"

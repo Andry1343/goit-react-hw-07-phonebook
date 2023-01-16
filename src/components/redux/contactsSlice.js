@@ -1,10 +1,6 @@
-/* import storage from 'redux-persist/lib/storage'; */
-/* import { persistReducer } from 'redux-persist'; */
-/* import { filterReducer } from './filterSlice'; */
-import { createSlice/* , combineReducers */ } from '@reduxjs/toolkit';
-/* import { nanoid } from 'nanoid'; */
+import { createSlice } from '@reduxjs/toolkit';
 
-import {fetchContacts} from '../redux/operations'
+import {fetchContacts, addContact, deleteContact} from '../redux/operations'
 
 const contactsSlice = createSlice({
   name: 'contacts',
@@ -27,9 +23,36 @@ const contactsSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    [addContact.pending](state) {
+      state.isLoading = true;
+    },
+    [addContact.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.items.push(action.payload);
+    },
+    [addContact.rejected](state, action) {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    [deleteContact.pending](state) {
+      state.isLoading = true;
+    },
+    [deleteContact.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      const index = state.items.findIndex(
+        task => task.id === action.payload.id
+      );
+      state.items.splice(index, 1);
+    },
+    [deleteContact.rejected](state, action) {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
-export const { addContact, deleteContact } = contactsSlice.actions;
 
 export const tasksReducer = contactsSlice.reducer;
