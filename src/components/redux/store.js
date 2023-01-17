@@ -6,7 +6,7 @@ import { filterReducer } from "./filterSlice";
 
 export const store = configureStore({
   reducer: {
-    tasks: tasksReducer,
+    contacts: tasksReducer,
     filters: filterReducer,
   },
 });

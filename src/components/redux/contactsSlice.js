@@ -15,7 +15,7 @@ const contactsSlice = createSlice({
       state.isLoading = true;
     },
     [fetchContacts.fulfilled](state, action) {
-      state.isLoading = false;
+      state.isLoading = true;
       state.error = null;
       state.items = action.payload;
     },
@@ -43,7 +43,7 @@ const contactsSlice = createSlice({
       state.isLoading = false;
       state.error = null;
       const index = state.items.findIndex(
-        task => task.id === action.payload.id
+        contacs => contacs.id === action.payload.id
       );
       state.items.splice(index, 1);
     },

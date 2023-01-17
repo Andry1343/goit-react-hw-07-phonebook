@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../redux/operations';
-import { getStatusFilter } from 'components/redux/selectors';
+import { selectContacts } from 'components/redux/selectors';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import style from '../form/Form.module.css';
@@ -10,7 +10,7 @@ export function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
-  const contacts = useSelector(getStatusFilter);
+  const contacts = useSelector(selectContacts);
 
   function handleChange(e) {
     const { name, value } = e.target;

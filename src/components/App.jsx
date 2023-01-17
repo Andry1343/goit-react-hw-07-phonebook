@@ -2,24 +2,25 @@ import { ContactForm } from '../components/form/Form.jsx';
 import { Filter } from '../components/filter/Filter.jsx';
 import { ContactList } from '../components/contactList/ContactList.jsx';
 import style from './form/Form.module.css';
-/* import { useSelector } from 'react-redux';
-import { getStatusFilter } from './redux/selectors'; */
 
-import { tasksReducer } from './redux/contactsSlice'
+
+
+import { fetchContacts } from './redux/operations.js';
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-/* import { getIsLoading } from './redux/selectors.js';
-import { getError } from './redux/selectors.js'; */
+
+/* import { getTasks, getIsLoading,  getError} from './redux/selectors' */
+
 
 export const App = () => {
-  /* const contacts = useSelector(getContacts); */
   const dispatch = useDispatch();
 
-  /* const isLoading = useSelector(getIsLoading);
-  const error = useSelector(getError); */
-
+  /* const contacts = useSelector(selectContacts);
+  const error = useSelector(selectError);
+  const isLoading = useSelector(selectIsLoading); */
+  
   useEffect(() => {
-    dispatch(tasksReducer());
+    dispatch(fetchContacts());
   }, [dispatch]);
 
   return (
@@ -32,9 +33,6 @@ export const App = () => {
       </div>
       <ContactList />
     </div>
-    
-
-   
   );
 };
 
