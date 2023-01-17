@@ -9,13 +9,14 @@ const contactsSlice = createSlice({
     isLoading: false,
     error: null,
   },
+  filter: '', // нужно сдесь ?
 
   extraReducers: {
     [fetchContacts.pending](state) {
       state.isLoading = true;
     },
     [fetchContacts.fulfilled](state, action) {
-      state.isLoading = true;
+      state.isLoading = false;
       state.error = null;
       state.items = action.payload;
     },
