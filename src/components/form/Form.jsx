@@ -7,9 +7,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import style from '../form/Form.module.css';
 
 export function ContactForm() {
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
 
   function handleChange(e) {
@@ -43,7 +43,7 @@ export function ContactForm() {
       return toast.warn(`${name} is already in contacts.`);
     }
 
-    dispatch(addContact(name, number));
+    dispatch(addContact({name, number}));
     setName('');
     setNumber('');
   }
