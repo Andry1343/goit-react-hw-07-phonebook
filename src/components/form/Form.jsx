@@ -34,16 +34,16 @@ export function ContactForm() {
     const name = e.target.elements.name.value;
     const number = e.target.elements.number.value;
 
-    const isExist = contacts.find(contact => {
+    const contactExists = contacts.find(contact => {
       return contact.name === name;
     });
-    if (isExist) {
+    if (contactExists) {
       setName('');
       setNumber('');
       return toast.warn(`${name} is already in contacts.`);
     }
 
-    dispatch(addContact({name, number}));
+    dispatch(addContact({ name, number }));
     setName('');
     setNumber('');
   }
